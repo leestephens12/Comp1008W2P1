@@ -1,3 +1,7 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class Card {
     private String faceName;
     private int faceValue;
@@ -24,7 +28,63 @@ public class Card {
      * @param suit
      */
     public Card(String faceName, String suit) {
+        setFaceName(faceName);
+        setSuit(suit);
+    }
+
+    public static List<String> getValidFaceNames() {
+        return Arrays.asList("two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "jack", "queen", "king", "ace");
+    }
+
+
+    public String getFaceName() {
+        if(getValidFaceNames().contains(faceName))
+            return faceName;
+        else
+            throw new IllegalArgumentException("Valid lists for face names are " +getValidFaceNames());
+    }
+
+    public void setFaceName(String faceName) {
         this.faceName = faceName;
-        this.suit = suit;
+    }
+
+    public int getFaceValue() {
+        return faceValue;
+    }
+
+    public void setFaceValue(int faceValue) {
+        if(faceValue >= 1 && faceValue <= 14) {
+            this.faceValue = faceValue;
+        }
+        else {
+            throw new IllegalArgumentException("face Value must be between 1 and 14");
+        }
+    }
+
+    public String getSuit() {
+        return suit;
+    }
+
+    /**
+     * This method will return an Arraylist of valid sut names
+     * @return a list of strings
+     */
+    public static List<String> getValidSuits() {
+        return Arrays.asList("Spades", "Clubs", "Hearts", "Diamonds");
+    }
+
+    public void setSuit(String suit) {
+        if(getValidSuits().contains(suit))
+            this.suit = suit;
+        else
+            throw new IllegalArgumentException("Valid lists of suits are " +getValidSuits());
+    }
+
+    /**
+     * This method will return a string that represents
+     * the card with the face name and suit
+     */
+    public String toString() {
+        return faceName + " of " + suit;
     }
 }
